@@ -1,0 +1,10 @@
+[project]
+name = "try-taipy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "loguru>=0.7.3",
+    "taipy>=4.0.3",
+]
