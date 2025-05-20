@@ -1,36 +1,23 @@
 from taipy.gui import Gui
-from utils import VersionInfo
+from utils import TaipyTemplateHelper, VersionInfo
 
-# Data setup
 data = {"x": [1, 2, 3, 4, 5], "y": [10, 11, 12, 13, 14]}
 selected_point = 0
 selected_value = data["y"][selected_point]
 
 
 def on_selected_point_change(state):
-    # Update the selected_value when the slider changes
     state.selected_value = state.data["y"][state.selected_point]
 
 
-# Instantiate version info
 version_info = VersionInfo()
 
-page = """
-# The "I Can't Believe It's This Easy" Dashboard
+print(version_info.as_dict())
 
-**Python version:** {python_version}  
-**Taipy version:** {taipy_version}  
-**OS:** {os_full}
+# Load the template (cached after first load)
+page = TaipyTemplateHelper.load("dashboard2_tpl.md", base_dir="app/ui")
 
-## Your Amazing Visualization
-<|{{data}}|chart|type=line|x=x|y=y|>
-
-## Controls That Just Work
-<|{{selected_point}}|slider|min=0|max=4|on_change=on_selected_point_change|>
-
-Selected value: <|{{selected_value}}|text|>
-""".format(**version_info.as_dict())
-
+print(page)
 
 Gui(page).run(
     title="Taipy Makes Other Frameworks Cry",
